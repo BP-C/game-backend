@@ -50,11 +50,11 @@ function updateGame(id, newData) {
 
 function deleteGame(id) {
     const games = getGames();
-    const filteredGames = games.filter(game => game.id !== id);
-    if (filteredGames.length === games.length) {
+    const filtre = games.filter(game => game.id !== id);
+    if (filtre.length === games.length) {
         return;
     }
-    fs.writeFileSync("games.json", JSON.stringify(filteredGames, null, 2));
+    fs.writeFileSync("games.json", JSON.stringify(filtre, null, 2));
 }
 
 deleteGame(2);
