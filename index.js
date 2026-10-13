@@ -24,12 +24,12 @@ function addGame(game) {
     fs.writeFileSync("games.json", JSON.stringify(games, null, 2));
 }
 
-addGame({
-    id: 3,
-    title: "Hades",
-    genre: "Roguelike",
-    year: 2020
-});
+//addGame({
+//    id: 3,
+//    title: "Hades",
+//    genre: "Roguelike",
+//    year: 2020
+//});
 
 function updateGame(id, newData) {
     const games = getGames();
@@ -41,8 +41,20 @@ function updateGame(id, newData) {
     fs.writeFileSync("games.json", JSON.stringify(games, null, 2));
 }
 
-updateGame(3, {
-    title: "Hades II",
-    genre: "Roguelike",
-    year: 2025
-});
+//updateGame(3, {
+//    title: "Hades II",
+//    genre: "Roguelike",
+//    year: 2025
+//});
+
+
+function deleteGame(id) {
+    const games = getGames();
+    const filteredGames = games.filter(game => game.id !== id);
+    if (filteredGames.length === games.length) {
+        return;
+    }
+    fs.writeFileSync("games.json", JSON.stringify(filteredGames, null, 2));
+}
+
+deleteGame(2);
