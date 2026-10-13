@@ -7,10 +7,16 @@ function getGames() {
     return games;
 }
 
+const games = getGames();
+console.log("Titre du premier jeu :", games[0].title);
+
 function getGameById(id) {
     const games = getGames();
     return games.find(game => game.id === id);
 }
+
+console.log(getGameById(2));
+console.log(getGameById(999));
 
 function addGame(game) {
     const games = getGames();
@@ -25,7 +31,18 @@ addGame({
     year: 2020
 });
 
-const games = getGames();
-console.log("Titre du premier jeu :", games[0].title);
-console.log(getGameById(2));
-console.log(getGameById(999));
+function updateGame(id, newData) {
+    const games = getGames();
+    const index = games.findIndex(game => game.id === id);
+    if (index === -1) {
+        return;
+    }
+    games[index] = { ...games[index], ...newData };
+    fs.writeFileSync("games.json", JSON.stringify(games, null, 2));
+}
+
+updateGame(3, {
+    title: "Hades II",
+    genre: "Roguelike",
+    year: 2025
+});
